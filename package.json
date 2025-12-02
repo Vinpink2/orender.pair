@@ -1,5 +1,5 @@
 {
-    "description": "June-x",
+    "description": "June-sessions",
     "main": "./index.js",
   "engines" : { 
     "npm" : ">=9.7.2",
@@ -13,7 +13,7 @@
   "dependencies": {
     "baileys-pro": "latest",
     "maher-zubair-baileys": "^6.6.5",
-    "@whiskeysockets/baileys":"^v7.0.0-rc.8",
+    "@whiskeysockets/baileys":"^7.0.0-rc.8",
     "qrcode": "^1.5.3",
     "awesome-phonenumber": "^2.64.0",
     "pino": "^8.1.0",
