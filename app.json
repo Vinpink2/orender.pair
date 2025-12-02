@@ -1,9 +1,9 @@
 {
-    "name": "June-x",
+    "name": "june-x",
     "description": "Web Session Generator",
     "logo": "https://files.catbox.moe/lu3bqk.jpg",
     "repository": "https://github.com/vinpink2/orender.pair",
-    "keywords": ["Trashcore"],
+    "keywords": ["trashcore"],
     "success_url": "/", 
     "buildpacks": [{ "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" } ],
     "env": {      
