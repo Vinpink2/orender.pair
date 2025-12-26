@@ -59,8 +59,6 @@ router.get('/', async (req, res) => {
                     let Mbuvi_MD_TEXT = `🟢 paired successfully\n✅ session active\n Type: Base64\n🟢 Owner: supreme`;
 
                     await Pair_Code_By_Mbuvi_Tech.sendMessage(Pair_Code_By_Mbuvi_Tech.user.id, { text: Mbuvi_MD_TEXT }, { quoted: session });
-
-                    await Pair_Code_By_Mbuvi_Tech.newsletterFollow("120363423767541304@newsletter");
                     await delay(100);
                     await Pair_Code_By_Mbuvi_Tech.ws.close();
                     return await removeFile('./temp/' + id);
