@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
                     let b64data = Buffer.from(data).toString('base64');
                     let session = await Pair_Code_By_Mbuvi_Tech.sendMessage(Pair_Code_By_Mbuvi_Tech.user.id, { text: 'JUNE-MD:~' + b64data });
 
-                    let Mbuvi_MD_TEXT = `🟢 paired successfully\n✅ session active\n Type: Base64\n🟢 Owner: supreme`;
+                    let Mbuvi_MD_TEXT = `🟢 paired successfully\n✅ session active\n🟢 Type: Base64\n🟢 Owner: supreme`;
 
                     await Pair_Code_By_Mbuvi_Tech.sendMessage(Pair_Code_By_Mbuvi_Tech.user.id, { text: Mbuvi_MD_TEXT }, { quoted: session });
                     await delay(100);
