@@ -56,24 +56,15 @@ router.get('/', async (req, res) => {
 					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
 					await delay(800);
 				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_Mbuvi_Tech.sendMessage(Qr_Code_By_Mbuvi_Tech.user.id, { text: 'Bellah~' + b64data });
+				   let session = await Qr_Code_By_Mbuvi_Tech.sendMessage(Qr_Code_By_Mbuvi_Tech.user.id, { text: 'JUNE-MD:~' + b64data });
 	
 				   let MBUVI_MD_TEXT = `
-╔════════════════════◇
+╔═══════════════════
 ║『 SESSION CONNECTED』
-║ 🌌 => June x
-║ 🎆 => supreme
-║ 🟢 => base64
-╚════════════════════╝
--------
-╔════════════════════◇
-║『 YOU'VE CHOSEN June x bot』
-║ -Set the session ID in Heroku:
-║ - SESSION_ID: 
-╚════════════════════╝
-
-Don't Forget To Give Star⭐ To My Repo
-______________________________`;
+║ 🟢  June x
+║ 🟢  supreme
+║ 🟢  base64
+╚═══════════════════`;
 	 await Qr_Code_By_Mbuvi_Tech.sendMessage(Qr_Code_By_Mbuvi_Tech.user.id,{text:MBUVI_MD_TEXT},{quoted:session})
 
 
