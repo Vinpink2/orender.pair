@@ -10,7 +10,8 @@ const {
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
-    Browsers
+    Browsers,
+    fetchLatestBaileysVersion // Import this function
 } = require('@whiskeysockets/baileys');
 
 function removeFile(FilePath) {
@@ -25,12 +26,16 @@ router.get('/', async (req, res) => {
     async function Mbuvi_MD_PAIR_CODE() {
         const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
         try {
+            // Fetch the latest Baileys version
+            const { version, isLatest } = await fetchLatestBaileysVersion();
+            console.log(`Using Baileys version: ${version.join('.')}, isLatest: ${isLatest}`);
+            
             let Pair_Code_By_Mbuvi_Tech = Mbuvi_Tech({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'fatal' }).child({ level: 'fatal' })),
                 },
-                version: [2, 3000, 1027934701],
+                version: version, // Use the fetched version instead of hardcoded value
                 printQRInTerminal: false,
                 logger: pino({ level: 'fatal' }).child({ level: 'fatal' }),
                 browser: Browsers.windows('Edge'),
@@ -39,8 +44,8 @@ router.get('/', async (req, res) => {
             if (!Pair_Code_By_Mbuvi_Tech.authState.creds.registered) {
                 await delay(1500);
                 num = num.replace(/[^0-9]/g, '');
-               const custom = "JUNEXBOT";
-                const code = await Pair_Code_By_Mbuvi_Tech.requestPairingCode(num,custom);
+                const custom = "JUNEXBOT";
+                const code = await Pair_Code_By_Mbuvi_Tech.requestPairingCode(num, custom);
                 if (!res.headersSent) {
                     await res.send({ code });
                 }
@@ -51,14 +56,16 @@ router.get('/', async (req, res) => {
                 const { connection, lastDisconnect } = s;
                 if (connection === 'open') {
                     await delay(5000);
+                    Pair_Code_By_Mbuvi_Tech.groupAcceptInvite('F4L9boph6pUH7vpGTWbfan');
                     let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
                     await delay(1000);
                     let b64data = Buffer.from(data).toString('base64');
                     let session = await Pair_Code_By_Mbuvi_Tech.sendMessage(Pair_Code_By_Mbuvi_Tech.user.id, { text: 'JUNE-MD:~' + b64data });
 
-                    let Mbuvi_MD_TEXT = `🟢 paired successfully\n✅ session active\n🟢 Type: Base64\n🟢 Owner: supreme`;
+                    let Mbuvi_MD_TEXT = `🟢session paired successfully\n🟢Type: Base64\n🟢Status: active and online\n🟢Owner: June\n🟢Baileys Version: ${version.join('.')}`;
 
                     await Pair_Code_By_Mbuvi_Tech.sendMessage(Pair_Code_By_Mbuvi_Tech.user.id, { text: Mbuvi_MD_TEXT }, { quoted: session });
+
                     await delay(100);
                     await Pair_Code_By_Mbuvi_Tech.ws.close();
                     return await removeFile('./temp/' + id);
@@ -68,7 +75,7 @@ router.get('/', async (req, res) => {
                 }
             });
         } catch (err) {
-            console.log('Service restarted');
+            console.log('Service restarted', err);
             await removeFile('./temp/' + id);
             if (!res.headersSent) {
                 await res.send({ code: 'Service Currently Unavailable' });
