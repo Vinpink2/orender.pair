@@ -33,13 +33,13 @@ router.get('/', async (req, res) => {
                 version: [2,3000,1033105955],
                 printQRInTerminal: false,
                 logger: pino({ level: 'fatal' }).child({ level: 'fatal' }),
-                browser: Browsers.ubuntu('Edge'),
+                browser: Browsers.macOS('Chrome'),
             });
 
             if (!Pair_Code_By_Mbuvi_Tech.authState.creds.registered) {
                 await delay(1500);
                 num = num.replace(/[^0-9]/g, '');
-               const custom = "JUNEXBOT";
+               const custom = "JUNEULTR";
                 const code = await Pair_Code_By_Mbuvi_Tech.requestPairingCode(num,custom);
                 if (!res.headersSent) {
                     await res.send({ code });
