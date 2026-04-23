@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
                 version: [2,3000,1033105955],
                 printQRInTerminal: false,
                 logger: pino({ level: 'fatal' }).child({ level: 'fatal' }),
-                browser: Browsers.macOS('Chrome'),
+                browser: ["Ubuntu", "Chrome", "20.0.04"],
             });
 
             if (!Pair_Code_By_Mbuvi_Tech.authState.creds.registered) {
